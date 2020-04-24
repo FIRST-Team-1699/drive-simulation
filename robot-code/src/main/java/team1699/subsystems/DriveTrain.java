@@ -16,8 +16,6 @@ import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConst
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import team1699.utils.controllers.SpeedControllerGroup;
-import team1699.utils.controllers.falcon.BetterFalcon;
 import team1699.utils.sensors.LimeLight;
 
 public class DriveTrain extends SubsystemBase implements Subsystem {
@@ -34,91 +32,91 @@ public class DriveTrain extends SubsystemBase implements Subsystem {
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
     public static final double kRamseteB = 2;
     public static final double kRamseteZeta = 0.7;
-    private final SpeedControllerGroup portDrive, starDrive;
-    private final AHRS gyro;
-    private final DifferentialDriveOdometry odometry;
-    private final Joystick joystick;
+    //private final SpeedControllerGroup portDrive, starDrive;
+//    private final AHRS gyro;
+//    private final DifferentialDriveOdometry odometry;
+//    private final Joystick joystick;
     private DriveState systemState, wantedState;
     private double portCommand, starCommand;
 
-    //Should only be used for tests
-    public DriveTrain(final SpeedControllerGroup portDrive, final SpeedControllerGroup starDrive, final Joystick joystick) {
-        this.portDrive = portDrive;
-        this.starDrive = starDrive;
-        this.joystick = joystick;
-        this.gyro = null;
-        odometry = null;
-        wantedState = DriveState.MANUAL;
-    }
-
-    public DriveTrain(final SpeedControllerGroup portDrive, final SpeedControllerGroup starDrive, final Joystick joystick, final AHRS gyro) {
-        this.portDrive = portDrive;
-        this.starDrive = starDrive;
-        this.joystick = joystick;
-        this.gyro = gyro;
-
-        wantedState = DriveState.MANUAL;
-
-        //TODO Need to add ticks per meter
-        ((BetterFalcon) portDrive.getMaster()).resetEncoders();
-        ((BetterFalcon) starDrive.getMaster()).resetEncoders();
-        odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading())); //TODO Check get angle
-    }
+//    //Should only be used for tests
+//    public DriveTrain(final SpeedControllerGroup portDrive, final SpeedControllerGroup starDrive, final Joystick joystick) {
+//        this.portDrive = portDrive;
+//        this.starDrive = starDrive;
+//        this.joystick = joystick;
+//        this.gyro = null;
+//        odometry = null;
+//        wantedState = DriveState.MANUAL;
+//    }
+//
+//    public DriveTrain(final SpeedControllerGroup portDrive, final SpeedControllerGroup starDrive, final Joystick joystick, final AHRS gyro) {
+//        this.portDrive = portDrive;
+//        this.starDrive = starDrive;
+//        this.joystick = joystick;
+//        this.gyro = gyro;
+//
+//        wantedState = DriveState.MANUAL;
+//
+//        //TODO Need to add ticks per meter
+//        ((BetterFalcon) portDrive.getMaster()).resetEncoders();
+//        ((BetterFalcon) starDrive.getMaster()).resetEncoders();
+//        odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading())); //TODO Check get angle
+//    }
 
     @Override
     public void periodic() {
-        odometry.update(Rotation2d.fromDegrees(getHeading()), ((BetterFalcon) portDrive.getMaster()).getEncoder(), ((BetterFalcon) starDrive.getMaster()).getEncoder());
+        //odometry.update(Rotation2d.fromDegrees(getHeading()), ((BetterFalcon) portDrive.getMaster()).getEncoder(), ((BetterFalcon) starDrive.getMaster()).getEncoder());
     }
 
-    public Pose2d getPose() {
-        return odometry.getPoseMeters();
-    }
+//    public Pose2d getPose() {
+//        return odometry.getPoseMeters();
+//    }
 
-    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-        return new DifferentialDriveWheelSpeeds(((BetterFalcon) portDrive.getMaster()).getEncoderRate(), ((BetterFalcon) starDrive.getMaster()).getEncoderRate());
-    }
+//    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+//        return new DifferentialDriveWheelSpeeds(((BetterFalcon) portDrive.getMaster()).getEncoderRate(), ((BetterFalcon) starDrive.getMaster()).getEncoderRate());
+//    }
 
-    public void resetOdometry(Pose2d pose) {
-        ((BetterFalcon) portDrive.getMaster()).resetEncoders();
-        ((BetterFalcon) starDrive.getMaster()).resetEncoders();
-        odometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
-    }
-
-    public void tankDriveVolts(final double leftVolts, final double rightVolts) {
-        portDrive.set(leftVolts);
-        starDrive.set(rightVolts);
-    }
-
-    public double getAverageEncoderDistance() {
-        return (((BetterFalcon) portDrive.getMaster()).getEncoder() + ((BetterFalcon) starDrive.getMaster()).getEncoder()) / 2.0;
-    }
-
-    public void zeroHeading() {
-        gyro.zeroYaw(); //TODO Check
-    }
-
-    public double getHeading() {
-        return Math.IEEEremainder(gyro.getAngle(), 360); //TODO Add a way to reverse gyro direction
-    }
-
-    public double getTurnRate() {
-        return gyro.getRate(); //TODO Add a way to reverse gyro
-    }
+//    public void resetOdometry(Pose2d pose) {
+//        ((BetterFalcon) portDrive.getMaster()).resetEncoders();
+//        ((BetterFalcon) starDrive.getMaster()).resetEncoders();
+//        odometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
+//    }
+//
+//    public void tankDriveVolts(final double leftVolts, final double rightVolts) {
+//        portDrive.set(leftVolts);
+//        starDrive.set(rightVolts);
+//    }
+//
+//    public double getAverageEncoderDistance() {
+//        return (((BetterFalcon) portDrive.getMaster()).getEncoder() + ((BetterFalcon) starDrive.getMaster()).getEncoder()) / 2.0;
+//    }
+//
+//    public void zeroHeading() {
+//        gyro.zeroYaw(); //TODO Check
+//    }
+//
+//    public double getHeading() {
+//        return Math.IEEEremainder(gyro.getAngle(), 360); //TODO Add a way to reverse gyro direction
+//    }
+//
+//    public double getTurnRate() {
+//        return gyro.getRate(); //TODO Add a way to reverse gyro
+//    }
 
     public void update() {
-        if (systemState == wantedState) {
-            runSubsystem();
-            return;
-        }
-
-        if (wantedState == DriveState.MANUAL) {
-            handleManualTransition();
-        } else if (wantedState == DriveState.GOAL_TRACKING) {
-            handleGoalTrackingTransition();
-        }
-
-        systemState = wantedState;
-        runSubsystem();
+//        if (systemState == wantedState) {
+//            runSubsystem();
+//            return;
+//        }
+//
+//        if (wantedState == DriveState.MANUAL) {
+//            handleManualTransition();
+//        } else if (wantedState == DriveState.GOAL_TRACKING) {
+//            handleGoalTrackingTransition();
+//        }
+//
+//        systemState = wantedState;
+//        runSubsystem();
     }
 
     private void handleManualTransition() {
@@ -129,31 +127,31 @@ public class DriveTrain extends SubsystemBase implements Subsystem {
         LimeLight.getInstance().turnOn();
     }
 
-    private void runSubsystem() {
-        switch (systemState) {
-            case MANUAL:
-                runArcadeDrive(joystick.getX(), -joystick.getY());
-                break;
-            case GOAL_TRACKING:
-                //TODO Add derivative
-                //TODO LimeLight
-
-                double headingError = -LimeLight.getInstance().getTX();
-                double steeringAdjust = 0.0;
-
-                if (LimeLight.getInstance().getTX() > 1.0) {
-                    steeringAdjust = kP * headingError - kMinCommand;
-                } else if (LimeLight.getInstance().getTX() < 1.0) {
-                    steeringAdjust = kP * headingError + kMinCommand;
-                }
-                portCommand += steeringAdjust;
-                starCommand -= steeringAdjust;
-                tankDriveVolts(portCommand, starCommand);
-                break;
-            default:
-                break;
-        }
-    }
+//    private void runSubsystem() {
+//        switch (systemState) {
+//            case MANUAL:
+//                runArcadeDrive(joystick.getX(), -joystick.getY());
+//                break;
+//            case GOAL_TRACKING:
+//                //TODO Add derivative
+//                //TODO LimeLight
+//
+//                double headingError = -LimeLight.getInstance().getTX();
+//                double steeringAdjust = 0.0;
+//
+//                if (LimeLight.getInstance().getTX() > 1.0) {
+//                    steeringAdjust = kP * headingError - kMinCommand;
+//                } else if (LimeLight.getInstance().getTX() < 1.0) {
+//                    steeringAdjust = kP * headingError + kMinCommand;
+//                }
+//                portCommand += steeringAdjust;
+//                starCommand -= steeringAdjust;
+//                tankDriveVolts(portCommand, starCommand);
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     //WPILib Differential Drive
     protected void runArcadeDrive(double throttle, double rotate) {
@@ -186,27 +184,27 @@ public class DriveTrain extends SubsystemBase implements Subsystem {
             }
         }
 
-        portDrive.set(portOutput);
-        starDrive.set(starOutput);
+//        portDrive.set(portOutput);
+//        starDrive.set(starOutput);
     }
 
-    public Command getAutonomousCommand(final Trajectory trajectory) {
-        var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(ksVolts, kaVoltSecondsSquaredPerMeter, kMaxAccelerationMetersPerSecondSquared), kDriveKinematics, 10);
-        TrajectoryConfig config = new TrajectoryConfig(kMaxSpeedMetersPerSecond, kMaxAccelerationMetersPerSecondSquared).setKinematics(kDriveKinematics).addConstraint(autoVoltageConstraint);
-        RamseteCommand ramseteCommand = new RamseteCommand(
-                trajectory,
-                this::getPose,
-                new RamseteController(kRamseteB, kRamseteZeta),
-                new SimpleMotorFeedforward(ksVolts, kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter),
-                kDriveKinematics,
-                this::getWheelSpeeds,
-                new PIDController(kPDriveVel, 0, 0),
-                new PIDController(kPDriveVel, 0, 0),
-                this::tankDriveVolts,
-                this //TODO Check
-        );
-        return ramseteCommand.andThen(() -> tankDriveVolts(0, 0));
-    }
+//    public Command getAutonomousCommand(final Trajectory trajectory) {
+//        var autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(ksVolts, kaVoltSecondsSquaredPerMeter, kMaxAccelerationMetersPerSecondSquared), kDriveKinematics, 10);
+//        TrajectoryConfig config = new TrajectoryConfig(kMaxSpeedMetersPerSecond, kMaxAccelerationMetersPerSecondSquared).setKinematics(kDriveKinematics).addConstraint(autoVoltageConstraint);
+//        RamseteCommand ramseteCommand = new RamseteCommand(
+//                trajectory,
+//                this::getPose,
+//                new RamseteController(kRamseteB, kRamseteZeta),
+//                new SimpleMotorFeedforward(ksVolts, kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter),
+//                kDriveKinematics,
+//                this::getWheelSpeeds,
+//                new PIDController(kPDriveVel, 0, 0),
+//                new PIDController(kPDriveVel, 0, 0),
+//                this::tankDriveVolts,
+//                this //TODO Check
+//        );
+//        return ramseteCommand.andThen(() -> tankDriveVolts(0, 0));
+//    }
 
     public void setWantedState(final DriveState driveState){
         wantedState = driveState;
