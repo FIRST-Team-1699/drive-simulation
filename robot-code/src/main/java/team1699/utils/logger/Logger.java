@@ -21,6 +21,7 @@ public class Logger implements Runnable {
     private boolean running = false;
     private Thread thread;
     private int ticks = 0;
+
     private Logger() throws Exception {
         alwaysLogged = new ArrayList<>();
         toLog = new ConcurrentLinkedQueue<>();
