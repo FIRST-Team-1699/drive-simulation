@@ -46,7 +46,7 @@ public class SimCTREControlled extends BaseTalon {
 
     @Override
     public int getSelectedSensorVelocity() {
-        return sensorVelocity
+        return sensorVelocity;
     }
 
     public double getPercentOut() {
