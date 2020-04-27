@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.BaseTalon;
  */
 public class SimCTREControlled extends BaseTalon {
 
+    //TODO Add something to allow for use of simEncoder
     private double percentOut, current;
     private int sensorValue, sensorVelocity;
 
