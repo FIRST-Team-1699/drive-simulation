@@ -5,35 +5,48 @@ import edu.wpi.first.wpilibj.Encoder;
 public class SimEncoder extends Encoder {
 
     private int rotations;
-    private int rate;
+    private double rate;
 
 
     public SimEncoder(int channelA, int channelB, boolean reverseDirection) {
         super(channelA, channelB, reverseDirection);
     }
-
+/**
+ * Gets rotations in 
+ */
 @Override
 public int get() {
     return rotations;
 }
+/** 
+ * Resets to 0
+*/
 
 @Override
 public void reset() {
 
 }
-
+/**
+ * Gives the rate in Seconds
+ */
 @Override 
 public double getRate() {
     return rate;
 
 }
-
+/**
+ * Updates time
+ * @param time
+ */
 public void update(double time) {
     time = rotations * rate;
 }
-
-public void setRate() {
-    
+/**
+ * Sets rate
+ * @param rate
+ */
+public void setRate(double rate) {
+    this.rate = rate;
 }
 
 }
