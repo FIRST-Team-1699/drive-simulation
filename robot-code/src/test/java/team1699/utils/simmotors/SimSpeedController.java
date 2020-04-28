@@ -7,9 +7,9 @@ public class SimSpeedController implements SpeedController {
     double speed;
     boolean isInverted;
     
-    public simSpeedController(int Port){
-        this.port = port;
-
+    public SimSpeedController(int Port){
+        this.port = Port;
+    }
 
 
     
