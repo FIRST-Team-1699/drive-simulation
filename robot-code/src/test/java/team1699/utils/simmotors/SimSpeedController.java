@@ -3,9 +3,19 @@ package team1699.utils.simmotors;
 import edu.wpi.first.wpilibj.SpeedController;
 
 public class SimSpeedController implements SpeedController {
+    int port;
+    double speed;
+    boolean isInverted;
+    
+    public simSpeedController(int Port){
+        this.port = port;
 
+
+
+    
     @Override
     public void set(double speed) {
+        this.speed = speed; 
 
     }
 
@@ -16,6 +26,8 @@ public class SimSpeedController implements SpeedController {
 
     @Override
     public void setInverted(boolean isInverted) {
+        this.isInverted = isInverted;
+
 
     }
 
