@@ -32,8 +32,8 @@ public class SimCTREControlled extends BaseTalon {
         }
     }
 
-    public void setSensorValue(int sensorValue){
-        this.sensorValue = sensorValue;
+    public void update(int dt){
+        sensorValue += sensorVelocity * dt;
     }
 
     public void setSensorVelocity(int sensorVelocity){
