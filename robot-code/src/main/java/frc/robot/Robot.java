@@ -20,7 +20,6 @@ public class Robot extends TimedRobot {
 
     }
 
-
     @Override
     public void autonomousInit() {
         String trajectoryJSONPath = "home/lvuser/deploy/paths/driveToShoot.wpilib.json";

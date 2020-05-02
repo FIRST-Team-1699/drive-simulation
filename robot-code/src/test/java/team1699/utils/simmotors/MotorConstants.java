@@ -1,4 +1,4 @@
-package team1699.utils;
+package team1699.utils.simmotors;
 
 public class MotorConstants {
 
