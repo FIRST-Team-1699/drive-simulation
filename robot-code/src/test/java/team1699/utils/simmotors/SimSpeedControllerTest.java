@@ -3,27 +3,28 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import org.junit.Before;
 import org.junit.Test;
 
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SimSpeedControllerTest{
-    private SimSpeedController simController;
-    public void setup(); {simController = new SimSpeedController()}
 
-    @BeforeClass
+    private SimSpeedController simController;
+
+    @Before
+    public void setup() {
+        simController = new SimSpeedController(0);
+    }
+
+    @Test
     public void testIsInverted(){
         simController.setInverted(true);
-        assertTrue(true, getInverted);
-
-
-
+        assertTrue(simController.getInverted());
     }
-    @BeforeClass
+
+    @Test
     public void testSpeed(){
-        simController.set(ControlMode.speed, 25.5);
-        assertEquals(25.5, speed, 0.001);
-
+        simController.set(25.5);
+        assertEquals(25.5, simController.get(), 0.001);
     }
-
-
 
 }
