@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class SimSpeedControllerTest{
     private SimSpeedController simController;
-    public void setup() {simController = new SimSpeedController()};
+    public void setup(); {simController = new SimSpeedController()}
 
     @BeforeClass
     public void testIsInverted(){
