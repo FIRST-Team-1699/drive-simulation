@@ -22,7 +22,7 @@ public class SimGyro extends GyroBase {
  * @param dt is change in time
  */
     public void update(double dt){
-        angle = rate * dt;
+        angle += rate * dt ;
     }
 
     @Override
