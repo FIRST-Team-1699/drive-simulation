@@ -37,7 +37,13 @@ import org.junit.Test;
             simGyro.update(10);
             assertEquals(expectedValue, simGyro.getAngle(), 0.01);
         }
-    System.out.println(expectedValue);
-    System.out.println(simGyro.getAngle());
+
+        simGyro.setRate(10);
+        for(int i = 0; i <= 10000; i += 10){
+            expectedValue += 10 * 10;
+            simGyro.update(10);
+            assertEquals(expectedValue, simGyro.getAngle(), 0.01);
+
+        }
     }
 }
