@@ -9,6 +9,7 @@ public class SimSpeedControllerTest{
     private SimSpeedController simController;
     public void setup() {simController = new SimSpeedController()}
 
+    @BeforeClass
     public void testIsInverted(){
         simController.setInverted(true);
         assertTrue(true, getInverted);
@@ -16,6 +17,7 @@ public class SimSpeedControllerTest{
 
 
     }
+    @BeforeClass
     public void testSpeed(){
         simController.set(ControlMode.speed, 25.5);
         assertEquals(25.5, speed, 0.001);
