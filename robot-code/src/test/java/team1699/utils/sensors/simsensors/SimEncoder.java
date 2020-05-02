@@ -39,7 +39,7 @@ public double getRate() {
  * @param time
  */
 public void update(double time) {
-    time = rotations * rate;
+    rotations += time * rate;
 }
 /**
  * Sets rate
